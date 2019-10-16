@@ -25,4 +25,4 @@ $ curl localhost:8000/?name=crash
 There are 2 active branches:
 
 * [master](https://github.com/simonpasquier/simple_flask_application/tree/master) with only the HTTP endpoint.
-* [instrumented](https://github.com/simonpasquier/simple_flask_application/tree/instrumented) with Prometheus metrics available at `/metrics`. In addition to the Python and process metrics, the application exposes `hellos_created`, `hellos_total`, `hellos_failed_created`, and `hellos_failed_total`.
+* [instrumented](https://github.com/simonpasquier/simple_flask_application/tree/instrumented) with Prometheus metrics available at `/metrics` ([master diff](https://github.com/simonpasquier/simple_flask_application/compare/instrumented)). In addition to the Python and process metrics, the application exposes `hellos_created`, `hellos_total`, `hellos_failed_created`, and `hellos_failed_total`.
