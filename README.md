@@ -8,14 +8,14 @@ pip install -r requirements.txt
 ./run.sh
 ```
 
-The application runs on `localhost:8000` and greets the client expect if the `name` request parameter is `crash`.
+The application runs on `localhost:3000` and greets the client expect if the `name` request parameter is `crash`.
 
 ```bash
-$ curl localhost:8000/
+$ curl localhost:3000/
 Hello, World!
-$ curl localhost:8000/?name=Simon
+$ curl localhost:3000/?name=Simon
 Hello, Simon!
-$ curl localhost:8000/?name=crash
+$ curl localhost:3000/?name=crash
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
 <title>500 Internal Server Error</title>
 <h1>Internal Server Error</h1>
