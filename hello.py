@@ -10,11 +10,12 @@ HELLO_FAILED_COUNTER = Counter('hellos_failed', 'Total number of hellos')
 @app.route('/')
 def hello():
     HELLO_COUNTER.inc()
-    name = request.args.get("name", "World")
-    if name == "crash":
+    try:
+        name = request.args["name"]
+        return f'Hello, {escape(name)}!'
+    except:
         HELLO_FAILED_COUNTER.inc()
         abort(500)
-    return f'Hello, {escape(name)}!'
 
 app_dispatch = DispatcherMiddleware(app, {
     '/metrics': make_wsgi_app()

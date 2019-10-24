@@ -8,14 +8,12 @@ pip install -r requirements.txt
 ./run.sh
 ```
 
-The application runs on `localhost:3000` and greets the client expect if the `name` request parameter is `crash`.
+The application runs on `localhost:3000`, it expects a `name` request and sends a greet message. It will return a `500` code if the parameter is missing.
 
 ```bash
-$ curl localhost:3000/
-Hello, World!
 $ curl localhost:3000/?name=Simon
 Hello, Simon!
-$ curl localhost:3000/?name=crash
+$ curl localhost:3000/
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
 <title>500 Internal Server Error</title>
 <h1>Internal Server Error</h1>
