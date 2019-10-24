@@ -5,9 +5,10 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello():
-    name = request.args.get("name", "World")
-    if name == "crash":
+    try:
+        name = request.args["name"]
+        return f'Hello, {escape(name)}!'
+    except:
         abort(500)
-    return f'Hello, {escape(name)}!'
 
 app_dispatch = DispatcherMiddleware(app)
