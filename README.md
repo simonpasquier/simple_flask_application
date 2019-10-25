@@ -1,6 +1,8 @@
 A very simple project demonstrating how to instrument a [Flask](https://palletsprojects.com/p/flask/) application with [Prometheus](https://prometheus.io).
 
-To run the application:
+## Running the application
+
+The usual way to install and run the app is to setup a virtual environment.
 
 ```bash
 virtualenv .
@@ -24,3 +26,20 @@ There are 2 active branches:
 
 * [master](https://github.com/simonpasquier/simple_flask_application/tree/master) with only the HTTP endpoint.
 * [instrumented](https://github.com/simonpasquier/simple_flask_application/tree/instrumented) with Prometheus metrics available at `/metrics` ([master diff](https://github.com/simonpasquier/simple_flask_application/compare/instrumented)). In addition to the Python and process metrics, the application exposes `hellos_created`, `hellos_total`, `hellos_failed_created`, and `hellos_failed_total`.
+
+## Running the demo
+
+First make sure that the following binaries are in your PATH:
+
+* [`prometheus`](https://github.com/prometheus/prometheus/)
+* [`alertmanager`](https://github.com/prometheus/alertmanager/)
+* [`loadtest`](https://github.com/simonpasquier/loadtest)
+* [`goreman`](https://github.com/mattn/goreman)
+
+Then run `goreman start`.
+
+The Prometheus UI is available at `http://localhost:9090/` and Alertmanager at `http://localhost:9093/`.
+
+## License
+
+Apache License 2.0, see [LICENSE](https://github.com/simonpasquier/simple_flask_application/blob/master/LICENSE).

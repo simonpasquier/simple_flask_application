@@ -1,0 +1,25 @@
+global:
+  scrape_interval:     10s
+  scrape_timeout:      10s
+  evaluation_interval: 10s
+
+alerting:
+  alertmanagers:
+  - static_configs:
+    - targets:
+      - localhost:9093
+    api_version: v2
+
+rule_files:
+    - "rules*.yml"
+
+scrape_configs:
+- job_name: 'prometheus'
+  static_configs:
+  - targets: ['localhost:9090']
+- job_name: 'app'
+  static_configs:
+  - targets: ['localhost:3000']
+- job_name: 'alertmanager'
+  static_configs:
+  - targets: ['localhost:9093']
