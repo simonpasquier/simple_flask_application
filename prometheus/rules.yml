@@ -1,0 +1,10 @@
+groups:
+- name: app
+  rules:
+  - alert: FailedHellos
+    expr: |
+       rate(hellos_failed_total[1m]) / rate(hellos_total[1m]) > 0
+    labels:
+      severity: critical
+    annotations:
+      message: "{{ $value | humanizePercentage }} of hello requests are failing."

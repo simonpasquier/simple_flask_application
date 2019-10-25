@@ -1,0 +1,7 @@
+route:
+  group_by: ['job']
+
+  receiver: nil-destination
+
+receivers:
+- name: nil-destination
