@@ -1,15 +1,17 @@
 from flask import Flask, escape, request, abort
-from prometheus_client import make_wsgi_app, Counter, Gauge
+from prometheus_client import make_wsgi_app, Counter, Gauge, Histogram
 from werkzeug.wsgi import DispatcherMiddleware
 
 app = Flask(__name__)
 
-HELLO_COUNTER = Counter('hellos', 'Total number of hellos')
-HELLO_FAILED_COUNTER = Counter('hellos_failed', 'Total number of hellos')
 INFO = Gauge('build_info', 'Information about the application', ['version'])
 INFO.labels('1.0.0').set(1)
+HELLO_COUNTER = Counter('hellos', 'Total number of hellos')
+HELLO_FAILED_COUNTER = Counter('hellos_failed', 'Total number of hellos')
+LATENCY = Histogram('hellos_latency_seconds', 'Histogram of hellos latency')
 
 @app.route('/')
+@LATENCY.time()
 def hello():
     HELLO_COUNTER.inc()
     try:
