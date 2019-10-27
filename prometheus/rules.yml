@@ -10,9 +10,9 @@ groups:
       message: "Instance {{ $labels.instance }} is down."
   - alert: FailedHellos
     expr: |
-       rate(hellos_failed_total[1m]) / rate(hellos_total[1m]) > 0
+       (rate(hellos_failed_total[1m]) / rate(hellos_total[1m]) > 0 ) * on(job,instance) group_right build_info
     for: 5m
     labels:
       severity: critical
     annotations:
-      message: "{{ $value | humanizePercentage }} of hello requests are failing."
+      message: "{{ $value | humanizePercentage }} of hello requests are failing (app version: {{ $labels.version }})."
