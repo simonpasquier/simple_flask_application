@@ -1,9 +1,17 @@
 groups:
 - name: app
   rules:
+  - alert: AppDown
+    expr: |
+       up{job="app"} == 0
+    labels:
+      severity: critical
+    annotations:
+      message: "Instance {{ $labels.instance }} is down."
   - alert: FailedHellos
     expr: |
        rate(hellos_failed_total[1m]) / rate(hellos_total[1m]) > 0
+    for: 5m
     labels:
       severity: critical
     annotations:
