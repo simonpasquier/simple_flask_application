@@ -10,7 +10,8 @@ INFO.labels('1.0.0').set(1)
 HELLO_COUNTER = Counter('hellos', 'Total number of hellos')
 HELLO_FAILED_COUNTER = Counter('hellos_failed', 'Total number of failed hellos')
 
-LATENCY = Histogram('hellos_latency_seconds', 'Histogram of latency')
+LATENCY = Histogram('hellos_latency_seconds', 'Histogram of latency',
+        buckets=(.0001, .0002, .0003, .0004, .0005))
 
 @app.route('/')
 def hello():
