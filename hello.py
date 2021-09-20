@@ -1,6 +1,6 @@
 from flask import Flask, escape, request, abort
 from prometheus_client import make_wsgi_app, Counter, Gauge, Histogram
-from werkzeug.wsgi import DispatcherMiddleware
+from werkzeug.middleware.dispatcher import DispatcherMiddleware
 
 app = Flask(__name__)
 
