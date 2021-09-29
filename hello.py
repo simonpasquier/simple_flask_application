@@ -1,16 +1,16 @@
 from flask import Flask, escape, request, abort
-from prometheus_client import make_wsgi_app, Counter, Gauge, Histogram
 from werkzeug.middleware.dispatcher import DispatcherMiddleware
 
-app = Flask(__name__)
+import prometheus_client
 
-INFO = Gauge('build_info', 'Information about the application', ['version'])
+INFO = prometheus_client.Gauge('hello_app_info', 'Hello applicatoin information', ['version'])
 INFO.labels('1.0.0').set(1)
 
-HTTP_COUNTER = Counter('http_requests', 'Total number of HTTP requests per status code', ['code'])
-
-LATENCY = Histogram('hellos_latency_seconds', 'Histogram of latency for hello requests',
+HTTP_COUNTER = prometheus_client.Counter('hello_app_http_requests', 'Total number of HTTP requests per status code', ['code'])
+LATENCY = prometheus_client.Histogram('hello_app_latency_seconds', 'Histogram of latency for hello requests',
         buckets=(.0001, .0002, .0003, .0004, .0005))
+
+app = Flask(__name__)
 
 @app.route('/')
 def hello():
@@ -27,5 +27,5 @@ def after_request_func(response):
     return response
 
 app_dispatch = DispatcherMiddleware(app, {
-    '/metrics': make_wsgi_app()
+    '/metrics': prometheus_client.make_wsgi_app()
 })
